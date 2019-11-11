@@ -11,6 +11,7 @@ class LoginController extends Controller
     public function indexAction()
     {
         $this->view->pick('login/index');
+
     }
 
     public function loginAction()
@@ -20,6 +21,7 @@ class LoginController extends Controller
         $user = Users::findFirst("email='$email'");
         if ($user) {
             if (strcmp($password, $user->password) == 0) {
+
                 $this->session->set(
                     'auth',
                     [
@@ -33,6 +35,7 @@ class LoginController extends Controller
                 } else if ($this->session->get('auth')['status'] === '0') {
                     $this->response->redirect();
                 }
+
                 echo "login berhasil";
             } else {
                 print_r($password);
