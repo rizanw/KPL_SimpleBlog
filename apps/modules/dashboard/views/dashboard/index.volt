@@ -1,5 +1,8 @@
 {% extends "_template/layout.volt" %}
+
 {% block title %}Dashboard{% endblock %}
+
+
 {% block content %}
 <div class="container">
     <div class="my-3 p-3 bg-white rounded box-shadow">
@@ -8,6 +11,8 @@
     </div>
     </div>
     <div class="my-3 p-3 bg-white rounded box-shadow">
+    <h1> {{ session['username'] }} </h1>
+    
     <table class="table">
       <thead>
         <tr>

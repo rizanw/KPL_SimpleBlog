@@ -27,12 +27,17 @@ class LoginController extends Controller
                     [
                         'id' => $user->id,
                         'username' => $user->email,
+                        'status' => 1,
                     ]
                 );
 
-                if ($this->session->get('auth')['status'] === '1') {
-                    $this->response->redirect('dashboard');
-                } else if ($this->session->get('auth')['status'] === '0') {
+
+
+                $auth =$this->session->get('auth');
+
+                if ($auth['status'] == '1') {
+                    $this->response->redirect('/dashboard');
+                } else if ($auth['status'] == '0') {
                     $this->response->redirect();
                 }
 
@@ -51,8 +56,9 @@ class LoginController extends Controller
         }
     }
 
-//    public function loginsessionAction()
-//    {
-//
-//    }
+   public function logoutAction()
+   {
+        $this->session->destroy();
+        $this->response->redirect('/dashboard/login');
+   }
 }
