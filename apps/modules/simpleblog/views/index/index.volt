@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Blog A Lot Ideas - Register</title>
+    <title>Simple Blog A Lot Ideas</title>
 </head>
 <body>
-    <h1>Register!</h1>
-    {{ form('user/register', 'method': 'post') }}
-    <div>
-        <label for='name'>Name</label>
-        {{ text_field('name', 'size': 64) }}
-    </div>
-        <label for='name'>Email</label>
-        {{ email_field('email', 'size': 64) }}
-    <div>
-        <label for='name'>Password</label>
-        {{ password_field('password', 'size': 32) }}
-    </div>
-    <div>
-        {{ submit_button('Register') }}
-    </div>
-    {{ end_form() }}
+    <h1>List of Ideas : </h1>
+    <ul>
+    {% for post in posts %}
+        <li>
+            <a href="#"> {{ post.title }} </a>
+        </li>
+    {% endfor  %}
+    </ul>
 </body>
 </html>
