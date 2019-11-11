@@ -1,5 +1,6 @@
 <?php
 
+use Phalcon\Session\Adapter\Files as Session;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Volt;
 
@@ -15,3 +16,10 @@ $di['view'] = function () {
 
     return $view;
 };
+
+$di->setShared('session', function() {
+    $session = new Session();
+    $session->start();
+
+    return $session;
+});

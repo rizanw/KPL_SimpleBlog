@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Simple Blog A Lot Ideas - Login</title>
-</head>
-<body>
-    <h1>Login!</h1>
+{% extends "_template/layout.volt" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+    <h1 class="text-center mb-3">Login</h1>
     {{ form('/dashboard/login/login', 'method': 'post') }}
-    <div>
-        <label for='name'>Email</label>
-        {{ email_field('email', 'size': 64) }}
+    <div class="form-group row">
+        <label for='email' class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+            {{ email_field('email', 'size': 64, 'class': "form-control") }}
+        </div>
     </div>
-    <div>
-        <label for='name'>Password</label>
-        {{ password_field('password', 'size': 32) }}
+    <div class="form-group row">
+        <label for='password' class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+            {{ password_field('password', 'size': 32, 'class': "form-control") }}
+       </div>
     </div>
-    <div>
-        {{ submit_button('Login') }}
-    </div>
+    {{ submit_button('Login', 'class':"btn btn-primary mb-2") }}
     {{ end_form() }}
-</body>
-</html>
+    </div>
+</div>
+{% endblock %}

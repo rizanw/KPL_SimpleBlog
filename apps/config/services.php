@@ -1,8 +1,7 @@
 <?php
 
 use Phalcon\Logger\Adapter\File as Logger;
-use Phalcon\Session\Adapter\Files as Session;
-use Phalcon\Http\Response\Cookies;
+ use Phalcon\Http\Response\Cookies;
 use Phalcon\Security;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\View;

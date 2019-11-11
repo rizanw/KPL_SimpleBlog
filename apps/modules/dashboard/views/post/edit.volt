@@ -1,23 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit your Idea!</title>
-</head>
-<body>
-    {{ form('/dashboard/login/login', 'method': 'post') }}
-
+{% extends "_template/layout.volt" %}
+{% block title %}Create Something Amazing{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+    {{ form('/dashboard/post/create', 'method': 'post') }}
         {{ hidden_field('author', 'value': "1") }}
-        <div>
+        <div class="form-group">
             <label for='title'>Title</label>
-            {{ text_field('title', 'size': 255) }}
+            {{ text_field('title', 'size': 255, 'class': "form-control") }}
         </div>
-        <div>
+        <div class="form-group">
             <label for='content'>Content</label>
-            {{ text_area('content') }}
+            {{ text_area('content', 'class': "form-control") }}
         </div>
-        <div>
-            {{ submit_button('Save') }}
+        <div class="form-group">
+            {{ submit_button('Save', 'class':"btn btn-primary mb-2") }}
         </div>
     {{ end_form() }}
-</body>
-</html>
+    </div>
+</div>
+{% endblock %}
