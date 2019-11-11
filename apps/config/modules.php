@@ -28,7 +28,7 @@ return array(
         'webControllerNamespace' => 'Phalcon\Init\BackOffice\Controllers\Web',
         'apiControllerNamespace' => 'Phalcon\Init\BackOffice\Controllers\Api',
         'className' => 'Phalcon\Init\BackOffice\Module',
-        'path' => APP_PATH . '/modules/backoffice/Module.php',
+        'path' => APP_PATH . '/modules/BackOffice/Module.php',
         'defaultRouting' => true,
         'defaultController' => 'index',
         'defaultAction' => 'index'

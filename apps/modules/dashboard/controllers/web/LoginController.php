@@ -20,23 +20,18 @@ class LoginController extends Controller
         $user = Users::findFirst("email='$email'");
         if ($user) {
             if (strcmp($password, $user->password) == 0) {
-//                $this->session->set(
-//                    'auth',
-//                    [
-//                        'id' => $user->id,
-//                        'username' => $user->email,
-//                    ]
-//                );
-//
-//                if ($this->session->get('auth')['status'] === '1') {
-//                    $this->response->redirect('dashboard');
-//                } else if ($this->session->get('auth')['status'] === '0') {
-//                    $this->response->redirect();
-//                }
-                try{
-                    $this->session->set('user-name', 'Michael');
-                }catch (\Exception $e){
-                    print_r($e);
+                $this->session->set(
+                    'auth',
+                    [
+                        'id' => $user->id,
+                        'username' => $user->email,
+                    ]
+                );
+
+                if ($this->session->get('auth')['status'] === '1') {
+                    $this->response->redirect('dashboard');
+                } else if ($this->session->get('auth')['status'] === '0') {
+                    $this->response->redirect();
                 }
                 echo "login berhasil";
             } else {

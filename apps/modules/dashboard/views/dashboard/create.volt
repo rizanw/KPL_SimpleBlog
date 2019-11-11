@@ -5,9 +5,6 @@
 </head>
 <body>
     <h1>Hello World! from Dashboard Module</h1>
-    <div>
-        <a href="{{ url() }}" class="btn btn-primary">Add an Idea</a>
-    </div>
     <table class="table">
       <thead>
         <tr>
@@ -17,13 +14,12 @@
         </tr>
       </thead>
       <tbody>
-      {% for post in posts %}
+
         <tr>
-          <th scope="row">{{ loop.index }}</th>
-          <td> {{ post.title }} </td>
+          <th scope="row">{% i++ %}</th>
+          <td> asdsasd </td>
           <td> edit | delete </td>
         </tr>
-      {% endfor  %}
       </tbody>
     </table>
 </body>
