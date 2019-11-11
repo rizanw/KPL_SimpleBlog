@@ -8,6 +8,7 @@
     <style>
 
     </style>
+   {% block head %}{% endblock %}
   </head>
   <body class="bg-light">
     {% block content %}
