@@ -10,7 +10,7 @@
         .rating {
             display: inline-block;
             position: relative;
-            height: 50px;
+            height: 27px;
             line-height: 27px;
             font-size: 27px;
         }
@@ -82,12 +82,36 @@
         {% for post in posts %}
             <div class="card">
                 <div class="card-header" id="heading{{ loop.index }}">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ loop.index }}"
-                                aria-expanded="true" aria-controls="collapse{{ loop.index }}">
-                            {{ post.title }}
-                        </button>
-                    </h5>
+                    <div class="row">
+                        <div class="col-10">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse"
+                                        data-target="#collapse{{ loop.index }}"
+                                        aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                                    {{ post.title }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div class="col-2">
+                            <h6 class="text-right text-muted">
+                                ratings:
+                                {% set sum = 0 %}
+                                {% set count = 0 %}
+                                {% for rating in ratings %}
+                                    {% if post.id === rating.post_id %}
+                                        {% set sum = sum + rating.value %}
+                                        {% set count+=1 %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if count === 0 %}
+                                    0
+                                {% else %}
+                                    {{ sum / count }}
+                                {% endif %}
+                                / 5
+                            </h6>
+                        </div>
+                    </div>
                 </div>
                 <div id="collapse{{ loop.index }}" class="collapse" aria-labelledby="heading{{ loop.index }}"
                      data-parent="#accordion">
@@ -101,37 +125,43 @@
                             <div class="text-muted">
                                 Give Some Stars Please...
                             </div>
-                            {{ form('/dashboard/login/login', 'method': 'post', 'class': "rating") }}
-                            <label>
-                                <input type="radio" name="stars" value="1"/>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="stars" value="2"/>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="stars" value="3"/>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="stars" value="4"/>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="stars" value="5"/>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
+                            {{ form('/simpleblog/rating/create', 'method': 'post', 'class': "w-100 ") }}
+                            <div class="rating">
+                                {{ hidden_field('post', 'value': post.id) }}
+                                <label>
+                                    <input type="radio" name="ratings" value="1"/>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="ratings" value="2"/>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="ratings" value="3"/>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="ratings" value="4"/>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="ratings" value="5"/>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                            </div>
+                            <div>
+                                {{ submit_button('rate!', 'class':"btn btn-warning btn-sm") }}
+                            </div>
                             {{ end_form() }}
                         </div>
                     </div>

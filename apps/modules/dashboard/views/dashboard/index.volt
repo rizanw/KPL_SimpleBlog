@@ -22,7 +22,22 @@
         <tr>
           <th scope="row">{{ loop.index }}</th>
           <td> {{ post.title }} </td>
-          <td> [nilai rating]</td>
+          <td>
+              {% set sum = 0 %}
+              {% set count = 0 %}
+              {% for rating in ratings %}
+                  {% if post.id === rating.post_id %}
+                      {% set sum = sum + rating.value %}
+                      {% set count+=1 %}
+                  {% endif %}
+              {% endfor %}
+              {% if count === 0 %}
+                  0
+              {% else %}
+                  {{ sum / count }}
+              {% endif %}
+              / 5
+          </td>
           <td> edit | delete </td>
         </tr>
       {% endfor  %}
