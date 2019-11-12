@@ -1,25 +1,26 @@
 <?php
 
 use Phalcon\Logger\Adapter\File as Logger;
- use Phalcon\Http\Response\Cookies;
+use Phalcon\Http\Response\Cookies;
+use Phalcon\Session\Adapter\Files as Session;
 use Phalcon\Security;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\View;
 use Phalcon\Flash\Direct as FlashDirect;
 use Phalcon\Flash\Session as FlashSession;
 
-$di['config'] = function() use ($config) {
-	return $config;
+$di['config'] = function () use ($config) {
+    return $config;
 };
 
-$di->setShared('session', function() {
+$di->setShared('session', function () {
     $session = new Session();
-	$session->start();
+    $session->start();
 
-	return $session;
+    return $session;
 });
 
-$di['dispatcher'] = function() use ($di, $defaultModule) {
+$di['dispatcher'] = function () use ($di, $defaultModule) {
 
     $eventsManager = $di->getShared('eventsManager');
     $dispatcher = new Dispatcher();
@@ -28,15 +29,15 @@ $di['dispatcher'] = function() use ($di, $defaultModule) {
     return $dispatcher;
 };
 
-$di['url'] = function() use ($config, $di) {
-	$url = new \Phalcon\Mvc\Url();
+$di['url'] = function () use ($config, $di) {
+    $url = new \Phalcon\Mvc\Url();
 
     $url->setBaseUri($config->url['baseUrl']);
 
-	return $url;
+    return $url;
 };
 
-$di['voltService'] = function($view, $di) use ($config) {
+$di['voltService'] = function ($view, $di) use ($config) {
     $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
     if (!is_dir($config->application->cacheDir)) {
         mkdir($config->application->cacheDir);
@@ -81,9 +82,9 @@ $di->set(
     function () {
         $flash = new FlashDirect(
             [
-                'error'   => 'alert alert-danger',
+                'error' => 'alert alert-danger',
                 'success' => 'alert alert-success',
-                'notice'  => 'alert alert-info',
+                'notice' => 'alert alert-info',
                 'warning' => 'alert alert-warning',
             ]
         );
@@ -97,15 +98,15 @@ $di->set(
     function () {
         $flash = new FlashSession(
             [
-                'error'   => 'alert alert-danger',
+                'error' => 'alert alert-danger',
                 'success' => 'alert alert-success',
-                'notice'  => 'alert alert-info',
+                'notice' => 'alert alert-info',
                 'warning' => 'alert alert-warning',
             ]
         );
 
         $flash->setAutoescape(false);
-        
+
         return $flash;
     }
 );

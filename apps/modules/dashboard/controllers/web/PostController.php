@@ -7,6 +7,24 @@ use Phalcon\Mvc\Controller;
 
 class PostController extends Controller
 {
+//    public function onConstruct()
+//    {
+//        if ($this->session->has('auth')) {
+//            // Retrieve its value
+//            $this->view->session = $this->session->get('auth');
+//        }
+//        else $this->response->redirect('/');
+//    }
+
+    public function indexAction()
+    {
+        if ($this->session->has('auth')) {
+            $this->response->redirect('/dashboard/post/new');
+        }else{
+            $this->response->redirect('/');
+        }
+    }
+
     public function newAction()
     {
         $this->view->pick('post/new');
@@ -28,6 +46,7 @@ class PostController extends Controller
 
         if ($success) {
             echo "An Idea Added!";
+            return $this->response->redirect('/dashboard');
         } else {
             echo "Sorry, the following problems were generated: ";
 

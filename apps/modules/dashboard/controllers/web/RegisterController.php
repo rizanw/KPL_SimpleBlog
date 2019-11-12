@@ -9,6 +9,11 @@ class RegisterController extends Controller
 {
     public function indexAction()
     {
+        if ($this->session->has('auth')) {
+            $this->response->redirect('/dashboard');
+        }else{
+            $this->view->session = null;
+        }
         $this->view->pick('register/index');
     }
 

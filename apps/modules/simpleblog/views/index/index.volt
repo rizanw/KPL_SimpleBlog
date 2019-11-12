@@ -74,22 +74,28 @@
         }
     </style>
     <nav class="navbar navbar-expand-lg navbar-primary bg-light">
-  <a class="navbar-brand" href="#">Simple Blog</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-    
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav nav-dropdown ml-auto mt-2 mt-lg-0">
-      <li class="nav-item   active">
-        <a class="nav-link " href="{{ url('/dashboard/login') }}"> <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button></a>
-      </li>
-     
-    </ul>
-    
-  </div>
-  
-</nav>
+        <a class="navbar-brand" href="#">Simple Ideas</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav nav-dropdown ml-auto mt-2 mt-lg-0">
+                <li class="nav-item   active">
+                    {% if session == null %}
+                        <a class="nav-link " href="{{ url('/dashboard/login') }}">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                        </a>
+                    {% else %}
+                        <a class="nav-link " href="{{ url('/dashboard') }}">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Dashboard</button>
+                        </a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
 </head>
 <body>
 

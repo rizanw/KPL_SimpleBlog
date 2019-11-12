@@ -10,8 +10,12 @@ class LoginController extends Controller
 {
     public function indexAction()
     {
+        if ($this->session->has('auth')) {
+            $this->response->redirect('/dashboard');
+        }else{
+            $this->view->session = null;
+        }
         $this->view->pick('login/index');
-
     }
 
     public function loginAction()
@@ -31,9 +35,7 @@ class LoginController extends Controller
                     ]
                 );
 
-
-
-                $auth =$this->session->get('auth');
+                $auth = $this->session->get('auth');
 
                 if ($auth['status'] == '1') {
                     $this->response->redirect('/dashboard');
@@ -48,17 +50,17 @@ class LoginController extends Controller
                 print_r($user->password);
                 echo "<br>";
                 echo "salah pass";
-//                $this->response->redirect('/dashboard/login');
+                $this->response->redirect('/dashboard/login');
             }
         } else {
             echo "ga ada user";
-//            $this->response->redirect('login');
+            $this->response->redirect('login');
         }
     }
 
-   public function logoutAction()
-   {
+    public function logoutAction()
+    {
         $this->session->destroy();
         $this->response->redirect('/dashboard/login');
-   }
+    }
 }
