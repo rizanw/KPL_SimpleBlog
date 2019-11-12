@@ -8,6 +8,17 @@ use Phalcon\Mvc\Controller;
 
 class DashboardController extends Controller
 {
+   
+	public function onConstruct()
+	{
+		if ($this->session->has('auth')) {
+            // Retrieve its value
+            $this->view->session = $this->session->get('auth');
+        }
+        else $this->response->redirect();
+	}
+
+
     public function indexAction()
     {
         $posts = Posts::find();
